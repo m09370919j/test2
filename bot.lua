@@ -2,11 +2,26 @@ package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
 .. ';.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
-tdcli = dofile('tdcli.lua')
+--tdcli = dofile('tdcli.lua')
 --redis = (loadfile "./libs/redis.lua")()
+--serpent = require('serpent')
+--serp = require 'serpent'.block
+--redis = Redis.connect('127.0.0.1', 6379)
+
+tdcli = dofile('tdcli.lua')
+local redis = require 'redis'
+redis = (loadfile "redis.lua")()
+JSON = require('dkjson')
+db = require('redis')
+redis = db.connect('127.0.0.1', 6379)
 serpent = require('serpent')
-serp = require 'serpent'.block
-redis = Redis.connect('127.0.0.1', 6379)
+redis:select(2)}
+redis = dofile('redis.lua')
+JSON = require('dkjson')
+serpent = require('serpent')
+redis = (loadfile "./libs/redis.lua")()
+redis = require('redis')
+
 
 sudo_users = {
   238773538,

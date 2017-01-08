@@ -335,7 +335,7 @@ end
         if redis:scard('muteusers:'..chat_id) == 0 then
           tdcli.sendText(chat_id, 0, 0, 1, nil, '_Not Muted User In This Group', 1, 'md')
         end
-        local text = "*Muted User List:*\n"
+        local text = "Muted User List:\n"
         for k,v in pairs(redis:smembers('muteusers:'..chat_id)) do
           text = text.."<b>"..k.."</b> - <b>"..v.."</b>\n"
         end

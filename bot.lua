@@ -345,253 +345,253 @@ end
 
       --lock links
       groups = redis:sismember('groups',chat_id)
-      if input:match("^[#!/]lock links$") and is_mod(msg) and groups then
+      if input:match("^[#!/]lock link$") and is_mod(msg) and groups then
         if redis:get('lock_linkstg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫_ Links is already Locked_', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Link* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('lock_linkstg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Links Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Link* _Posting Has Been Locked_', 1, 'md')
         end
       end
-      if input:match("^[#!/]unlock links$")  and is_mod(msg) and groups then
+      if input:match("^[#!/]unlock link$")  and is_mod(msg) and groups then
         if not redis:get('lock_linkstg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 links is already UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Link* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('lock_linkstg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nlinks Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Link* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock username
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock username$") and is_mod(msg) and groups then
         if redis:get('usernametg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Username is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Username* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('usernametg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nUsername Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Username* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock username$") and is_mod(msg) and groups then
         if not redis:get('usernametg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Username is already UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Username* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('usernametg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nUsername Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Username* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock tag
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock tag$") and is_mod(msg) and groups then
         if redis:get('tagtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Tag is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Tag* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('tagtg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nTag Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Tag* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock tag$") and is_mod(msg) and groups then
         if not redis:get('tagtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Tag is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Tag* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('tagtg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\n.... Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Tag* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock forward
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock forward$") and is_mod(msg) and groups then
         if redis:get('forwardtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Forward is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Forward* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('forwardtg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nForward Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Forward* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock forward$") and is_mod(msg) and groups then
         if not redis:get('forwardtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Forward is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Forward* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('forwardtg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nForward Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Forward* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --arabic/persian
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock arabic$") and is_mod(msg) and groups then
         if redis:get('arabictg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Persian/Arabic is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Arabic/Persian* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('arabictg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nPersian/Arabic Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Arabic/Persian* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock arabic$") and is_mod(msg) and groups then
         if not redis:get('arabictg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Persian/Arabic is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Arabic/Persian* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('arabictg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nPersian/Arabic Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Arabic/Persian* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       ---english
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock english$") and is_mod(msg) and groups then
         if redis:get('engtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 English is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*English* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('engtg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEnglish Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*English* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock english$") and is_mod(msg) and groups then
         if not redis:get('engtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 English is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*English* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('engtg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEnglish Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*English* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock foshtg
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock fosh$") and is_mod(msg) and groups then
         if redis:get('badwordtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Fosh is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*BadWord* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('badwordtg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nFosh Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*BadWord* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock fosh$") and is_mod(msg) and groups then
         if not redis:get('badwordtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Fosh is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*BadWord* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('badwordtg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nFosh Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*BadWord* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock edit
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock edit$") and is_mod(msg) and groups then
         if redis:get('edittg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Edit is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('edittg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEdit Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock edit$") and is_mod(msg) and groups then
         if not redis:get('edittg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Edit is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('edittg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEdit Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --- lock Caption
       if input:match("^[#!/]lock caption$") and is_mod(msg) and groups then
         if redis:get('captg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Caption is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Caption* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('captg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nCaption Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Caption* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock caption$") and is_mod(msg) and groups then
         if not redis:get('captg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Caption is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Caption* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('captg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nCaption Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Caption* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock emoji
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock emoji") and is_mod(msg) and groups then
         if redis:get('emojitg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Emoji is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Emoji* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('emojitg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEmoji Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Emoji* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock emoji$") and is_mod(msg) and groups then
         if not redis:get('emojitg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Emoji is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Emoji* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('emojitg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nEmoji Has Been UNLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Emoji* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --- lock inline
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock inline") and is_mod(msg) and groups then
         if redis:get('inlinetg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Inline is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Inline* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('inlinetg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nInline Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Inline* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock inline$") and is_mod(msg) and groups then
         if not redis:get('inlinetg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Inline is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Inline* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('inlinetg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nInline Has Been UNLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Inline* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       -- lock reply
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock reply") and is_mod(msg) and groups then
         if redis:get('replytg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Reply is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Reply* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('replytg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nReply Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Reply* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock reply$") and is_mod(msg) and groups then
         if not redis:get('replytg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Reply is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Reply* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('replytg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nReply Has Been UNLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Reply* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock tgservice
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Ll]ock tgservice$") and is_mod(msg) and groups then
         if redis:get('tgservice:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 TGservice is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*TGservice* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('tgservice:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nTGservice Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*TGservice* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nlock tgservice$") and is_mod(msg) and groups then
         if not redis:get('tgservice:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 TGservice is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*TGservice* _Posting Is Already Locked_', 1, 'md')
         else
           redis:del('tgservice:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nTGservice Has Been UnLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*TGservice* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
       --lock flood (by @Flooding)
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock flood") and is_mod(msg) and groups then
         if redis:get('floodtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 Flood is already Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Flood* _Posting Is Already Locked_', 1, 'md')
         else
           redis:set('floodtg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Done\nFlood Has Been Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Flood* _Posting Has Been Locked_', 1, 'md')
         end
       end
       if input:match("^[#!/]unlock flood$") and is_mod(msg) and groups then
         if not redis:get('floodtg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '🚫 flood is already Not Locked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Flood* _Posting Is Already UnLocked_', 1, 'md')
         else
           redis:del('flood:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '✅ #Flood\nReply Has Been UNLocked', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Flood* _Posting Has Been UnLocked_', 1, 'md')
         end
       end
 

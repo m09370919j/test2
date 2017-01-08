@@ -200,16 +200,16 @@ function tdcli_update_callback(data)
         tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>PONG</b>', 1, 'html')
       end
       if input:match("^[#!/][Ii][Dd]$") then
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>SuperGroup ID : </b><code>'..string.sub(chat_id, 5,14)..'</code>\n<b>User ID : </b><code>'..user_id..'</code>\n<b>Channel : </b>@MuteTeam', 1, 'html')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>Chat ID:</b> <code>'..string.sub(chat_id, 5,14)..'</code>\n<b>Your ID:</b> <code>'..user_id..'</code>', 1, 'html')
       end
 
       if input:match("^[#!/][Pp][Ii][Nn]$") and reply_id and is_owner(msg) then
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>Message Pinned</b>', 1, 'html')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>Done!</b>', 1, 'html')
         tdcli.pinChannelMessage(chat_id, reply_id, 1)
       end
 
       if input:match("^[#!/][Uu][Nn][Pp][Ii][Nn]$") and reply_id and is_owner(msg) then
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>Message UnPinned</b>', 1, 'html')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>Done!</b>', 1, 'html')
         tdcli.unpinChannelMessage(chat_id, reply_id, 1)
       end
 

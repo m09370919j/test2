@@ -2,7 +2,6 @@ package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
 .. ';.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
--- @MuteTeam
 tdcli = dofile('tdcli.lua')
 redis = (loadfile "./libs/redis.lua")()
 serpent = require('serpent')
@@ -101,7 +100,7 @@ function vardump(value, depth, key)
   elseif type(value)  == 'function' or
     type(value) == 'thread' or
     type(value) == 'userdata' or
-    value == nil then --@MuteTeam
+    value == nil then 
     print(spaces .. tostring(value))
   elseif type(value)  == 'string' then
     print(spaces .. linePrefix .. '"' .. tostring(value) .. '",')
@@ -122,7 +121,7 @@ local function setowner_reply(extra, result, success)
   local ch = result.chat_id_
   redis:del('owners:'..ch)
   redis:set('owners:'..ch,user)
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '🚀 #Done\nuser '..user..' *ownered*', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..user..']* _Added As Owner_', 1, 'md')
   print(user)
 end
 
@@ -132,7 +131,7 @@ local function deowner_reply(extra, result, success)
   local user = result.sender_user_id_
   local ch = result.chat_id_
   redis:del('owners:'..ch)
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '🚀 #Done\nuser '..user..' *rem ownered*', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..user..']* _Removed From Owner_', 1, 'md')
   print(user)
 end
 
@@ -143,7 +142,7 @@ local msg = result.id_
 local user = result.sender_user_id_
 local chat = result.chat_id_
 redis:sadd('mods:'..chat,user)
-tdcli.sendText(result.chat_id_, 0, 0, 1, nil, ' 🚀 #Done\nuser '..user..' *Promoted*', 1, 'md')
+tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..user..']* _Has Been Promoted*', 1, 'md')
 end
 
 local function remmod_reply(extra, result, success)
@@ -152,32 +151,32 @@ local msg = result.id_
 local user = result.sender_user_id_
 local chat = result.chat_id_
 redis:srem('mods:'..chat,user)
-tdcli.sendText(result.chat_id_, 0, 0, 1, nil, ' 🚀 #Done\nuser '..user..' *Rem Promoted*', 1, 'md')
+tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..user..']* _Has Been Demoted_', 1, 'md')
 end
 
 function kick_reply(extra, result, success)
   b = vardump(result)
   tdcli.changeChatMemberStatus(result.chat_id_, result.sender_user_id_, 'Kicked')
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '#Done\n🔹user '..result.sender_user_id_..' *kicked*', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..result.sender_user_id_..']* _Has Been Kicked_', 1, 'md')
 end
 
 function ban_reply(extra, result, success)
   b = vardump(result)
   tdcli.changeChatMemberStatus(result.chat_id_, result.sender_user_id_, 'Banned')
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '#Done\n🔹user '..result.sender_user_id_..' *banned*', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..result.sender_user_id_..']* _Banned_', 1, 'md')
 end
 
 
 local function setmute_reply(extra, result, success)
   vardump(result)
   redis:sadd('muteusers:'..result.chat_id_,result.sender_user_id_)
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, 'user '..result.sender_user_id_..' added to mutelist', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..result.sender_user_id_..']* _Added To Muted User List_', 1, 'md')
 end
 
 local function demute_reply(extra, result, success)
   vardump(result)
   redis:srem('muteusers:'..result.chat_id_,result.sender_user_id_)
-  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, 'user '..result.sender_user_id_..' removed to mutelist', 1, 'md')
+  tdcli.sendText(result.chat_id_, 0, 0, 1, nil, '_User_ *['..result.sender_user_id_..']* _Removed From Muted User List_', 1, 'md')
 end
 
 
@@ -219,7 +218,7 @@ function tdcli_update_callback(data)
       if input:match('^[!#/]([Ss]etowner)$') and is_owner(msg) and msg.reply_to_message_id_ then
         tdcli.getMessage(chat_id,msg.reply_to_message_id_,setowner_reply,nil)
       end
-      if input == "/delowner" and is_sudo(msg) and msg.reply_to_message_id_ then
+      if input:match('^[!#/]([Rr]emowner)$') and is_sudo(msg) and msg.reply_to_message_id_ then
         tdcli.getMessage(chat_id,msg.reply_to_message_id_,deowner_reply,nil)
       end
 
@@ -227,31 +226,31 @@ function tdcli_update_callback(data)
         local hash = 'owners:'..chat_id
         local owner = redis:get(hash)
         if owner == nil then
-          tdcli.sendText(chat_id, 0, 0, 1, nil, '🔸Group *Not* Owner ', 1, 'md')
+          tdcli.sendText(chat_id, 0, 0, 1, nil, '_No Owner In This Group_', 1, 'md')
         end
         local owner_list = redis:get('owners:'..chat_id)
-        text85 = '👤*Group Owner :*\n\n '..owner_list
+        text85 = 'SuperGroup Owner Is *['..owner_list..']*'
         tdcli.sendText(chat_id, 0, 0, 1, nil, text85, 1, 'md')
       end
       if input:match('^[/!#]setowner (.*)') and not input:find('@') and is_sudo(msg) then
         redis:del('owners:'..chat_id)
         redis:set('owners:'..chat_id,input:match('^[/!#]setowner (.*)'))
-        tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[/!#]setowner (.*)')..' ownered', 1, 'md')
+        tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..input:match('^[/!#]setowner (.*)')..']* _Added As Owner_', 1, 'md')
       end
 
       if input:match('^[/!#]setowner (.*)') and input:find('@') and is_owner(msg) then
         function Inline_Callback_(arg, data)
           redis:del('owners:'..chat_id)
           redis:set('owners:'..chat_id,input:match('^[/!#]setowner (.*)'))
-          tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[/!#]setowner (.*)')..' ownered', 1, 'md')
+          tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..input:match('^[/!#]setowner (.*)')..']* _Added As Owner_', 1, 'md')
         end
         tdcli_function ({ID = "SearchPublicChat",username_ =input:match('^[/!#]setowner (.*)')}, Inline_Callback_, nil)
       end
 
 
-      if input:match('^[/!#]delowner (.*)') and is_sudo(msg) then
+      if input:match('^[/!#]remowner (.*)') and is_sudo(msg) then
         redis:del('owners:'..chat_id)
-        tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[/!#]delowner (.*)')..' rem ownered', 1, 'md')
+        tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..input:match('^[/!#]remowner (.*)')..']* _Removed From Owner_', 1, 'md')
       end
       -----------------------------------------------------------------------------------------------------------------------
       if input:match('^[/!#]promote') and is_sudo(msg) and msg.reply_to_message_id_ then
@@ -264,20 +263,20 @@ end
 			sm = input:match('^[/!#]promote (.*)')
 if sm and is_sudo(msg) then
   redis:sadd('mods:'..chat_id,sm)
-  tdcli.sendText(chat_id, 0, 0, 1, nil, '🚀 #Done\nuser '..sm..'*Add Promote*', 1, 'md')
+  tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..sm..']* _Has Been Promoted_', 1, 'md')
 end
 
 dm = input:match('^[/!#]demote (.*)')
 if dm and is_sudo(msg) then
   redis:srem('mods:'..chat_id,dm)
-  tdcli.sendText(chat_id, 0, 0, 1, nil, '🚀 #Done\nuser '..dm..'*Rem Promote*', 1, 'md')
+  tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..dm..']* _Has Been Demoted_', 1, 'md')
 end
 
 if input:match('^[/!#]modlist') then
 if redis:scard('mods:'..chat_id) == 0 then
-tdcli.sendText(chat_id, 0, 0, 1, nil, 'Group Not Mod', 1, 'md')
+tdcli.sendText(chat_id, 0, 0, 1, nil, '_No Moderators In This Group_', 1, 'md')
 end
-local text = "Group Mod List : \n"
+local text = "*Group Moderators:*\n"
 for k,v in pairs(redis:smembers('mods:'..chat_id)) do
 text = text.."_"..k.."_ - *"..v.."*\n"
 end
@@ -286,12 +285,12 @@ end
       ---------------------------------------------------------------------------------------------------------------------------------
       if input:match("^[#!/][Aa]dd$") and is_sudo(msg) then
         redis:sadd('groups',chat_id)
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Group Has Been Added By* `'..msg.sender_user_id_..'`', 1, 'md')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '_Group Has Been Added_', 1, 'md')
       end
       -------------------------------------------------------------------------------------------------------------------------------------------
       if input:match("^[#!/][Rr]em$") and is_sudo(msg) then
         redis:srem('groups',chat_id)
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Group Has Been Removed By* `'..msg.sender_user_id_..'`', 1, 'md')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '_Group Has Been Removed_', 1, 'md')
       end
       -----------------------------------------------------------------------------------------------------------------------------------------------
       -----------------------------------------------------------------------
@@ -300,13 +299,13 @@ end
       end
 
       if input:match('^[!#/]kick (.*)') and not input:find('@') and is_mod(msg) then
-        tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[!#/]kick (.*)')..' kicked', 1, 'md')
+        tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..input:match('^[!#/]kick (.*)')..']* _Has Been Kicked_', 1, 'md')
         tdcli.changeChatMemberStatus(chat_id, input:match('^[!#/]kick (.*)'), 'Kicked')
       end
 
       if input:match('^[!#/]kick (.*)') and input:find('@') and is_mod(msg) then
         function Inline_Callback_(arg, data)
-          tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[!#/]kick (.*)')..' kicked', 1, 'md')
+          tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..input:match('^[!#/]kick (.*)')..']* _Has Been Kicked_', 1, 'md')
           tdcli.changeChatMemberStatus(chat_id, data.id_, 'Kicked')
         end
         tdcli_function ({ID = "SearchPublicChat",username_ =input:match('^[!#/]kick (.*)')}, Inline_Callback_, nil)
@@ -324,19 +323,19 @@ end
       if mu and is_mod(msg) then
         redis:sadd('muteusers:'..chat_id,mu)
         redis:set('tbt:'..chat_id,'yes')
-        tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..mu..' added to mutelist', 1, 'md')
+        tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..mu..']* _Added To Muted User List_', 1, 'md')
       end
       umu = input:match('^[/!#]unmuteuser (.*)')
       if umu and is_mod(msg) then
         redis:srem('muteusers:'..chat_id,umu)
-        tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..umu..' removed to mutelist', 1, 'md')
+        tdcli.sendText(chat_id, 0, 0, 1, nil, '_User_ *['..umu..']* _Removed From Muted User List_', 1, 'md')
       end
 
-      if input:match('^[/!#]muteusers') then
+      if input:match('^[/!#]mutelist') then
         if redis:scard('muteusers:'..chat_id) == 0 then
-          tdcli.sendText(chat_id, 0, 0, 1, nil, 'Group Not MuteUser', 1, 'md')
+          tdcli.sendText(chat_id, 0, 0, 1, nil, '_Not Muted User In This Group', 1, 'md')
         end
-        local text = "MuteUser List:\n"
+        local text = "*Muted User List:*\n"
         for k,v in pairs(redis:smembers('muteusers:'..chat_id)) do
           text = text.."<b>"..k.."</b> - <b>"..v.."</b>\n"
         end

@@ -2,24 +2,22 @@ package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
 .. ';.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
---tdcli = dofile('tdcli.lua')
---redis = (loadfile "./libs/redis.lua")()
---serpent = require('serpent')
-serp = require 'serpent'.block
---redis = Redis.connect('127.0.0.1', 6379)
-
 tdcli = dofile('tdcli.lua')
-redis = dofile('./libs/redis.lua')
-local redis = require 'redis'
 redis = (loadfile "./libs/redis.lua")()
-JSON = require('dkjson')
-db = require('redis')
-redis = db.connect('127.0.0.1', 6379)
 serpent = require('serpent')
-redis:select(2)
-JSON = require('dkjson')
-serpent = require('serpent')
-redis = (loadfile "./libs/redis.lua")()
+serp = require 'serpent'.block
+
+
+--tdcli = dofile('tdcli.lua')
+--redis = dofile('./libs/redis.lua')
+--local redis = require 'redis'
+--redis = (loadfile "./libs/redis.lua")()
+--JSON = require('dkjson')
+redis = redis.connect('127.0.0.1', 6379)
+--serpent = require('serpent')
+--JSON = require('dkjson')
+--serpent = require('serpent')
+--redis = (loadfile "./libs/redis.lua")()
 redis = require('redis')
 
 

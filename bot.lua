@@ -24,8 +24,7 @@ redis = require('redis')
 
 
 sudo_users = {
-  238773538,
-  173606679,
+  90285047,
   0
 }
 

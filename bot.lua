@@ -692,18 +692,18 @@ end
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute all$") and is_mod(msg) and groups then
         if redis:get('mute_alltg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All Is Already Enabled*', 1, 'md')
         else
           redis:set('mute_alltg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All Has Been Enabled*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute all$") and is_mod(msg) and groups then
         if not redis:get('mute_alltg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All Is Already Disabled*', 1, 'md')
         else
           redis:del('mute_alltg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute All Has Been Disabled*', 1, 'md')
         end
       end
 
@@ -727,20 +727,20 @@ end
       end
       --mute gift
       groups = redis:sismember('groups',chat_id)
-      if input:match("^[#!/][Mm]ute gift$") and is_mod(msg) and groups then
+      if input:match("^[#!/][Mm]ute gif$") and is_mod(msg) and groups then
         if redis:get('mute_contacttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute gift is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Gif Is Already Enabled*', 1, 'md')
         else
           redis:set('mute_contacttg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute gift has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Gif Has Been Enabled*', 1, 'md')
         end
       end
-      if input:match("^[#!/][Uu]nmute gift$") and is_mod(msg) and groups then
+      if input:match("^[#!/][Uu]nmute gif$") and is_mod(msg) and groups then
         if not redis:get('mute_contacttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute gift is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Gif Is Already Disabled*', 1, 'md')
         else
           redis:del('mute_contacttg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute gift has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Gif Has Been Disabled*', 1, 'md')
         end
       end
       --mute contact
@@ -765,108 +765,108 @@ end
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute photo$") and is_mod(msg) and groups then
         if redis:get('mute_phototg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute photo is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Photo Is Already Enabled*', 1, 'md')
         else
           redis:set('mute_phototg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute photo has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Photo Has Been Enabled*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute photo$") and is_mod(msg) and groups then
         if not redis:get('mute_phototg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute photo is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Photo Is Already Disabled*', 1, 'md')
         else
           redis:del('mute_phototg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute photo has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Photo Has Been Disabled*', 1, 'md')
         end
       end
       --mute audio
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute audio$") and is_mod(msg) and groups then
         if redis:get('mute_audiotg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute audio is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Audio Is Already Enabled*', 1, 'md')
         else
           redis:set('mute_audiotg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute audio has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Audio Has Been Enabled*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute audio$") and is_mod(msg) and groups then
         if not redis:get('mute_audiotg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute audio is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Audio Is Already Disabled*', 1, 'md')
         else
           redis:del('mute_audiotg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute audio has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute Audio Has Been Disabled*', 1, 'md')
         end
       end
       --mute voice
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute voice$") and is_mod(msg) and groups then
         if redis:get('mute_voicetg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute voice is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Voice Is Already Muted*', 1, 'md')
         else
           redis:set('mute_voicetg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute voice has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Voice Has Been Muted*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute voice$") and is_mod(msg) and groups then
         if not redis:get('mute_voicetg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute voice is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Voice Is Already UnMuted*', 1, 'md')
         else
           redis:del('mute_videotg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute voice has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Voice Has Been UnMuted*', 1, 'md')
         end
       end
       --mute video
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute video$") and is_mod(msg) and groups then
         if redis:get('mute_videotg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute video is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Video Is Already Muted*', 1, 'md')
         else
           redis:set('mute_videotg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute video has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Video Has Been Muted*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute video$") and is_mod(msg) and groups then
         if not redis:get('mute_videotg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute video is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Video Is Already UnMuted*', 1, 'md')
         else
           redis:del('mute_videotg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute video has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Video Has Been UnMuted*', 1, 'md')
         end
       end
       --mute document
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute document$") and is_mod(msg) and groups then
         if redis:get('mute_documenttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute document is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Document Is Already Muted*', 1, 'md')
         else
           redis:set('mute_documenttg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute document has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Document Has Been Muted*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute document$") and is_mod(msg) and groups then
         if not redis:get('mute_documenttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute document is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Document Is Already UnMuted*', 1, 'md')
         else
           redis:del('mute_documenttg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute document has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Document Has Been UnMuted*', 1, 'md')
         end
       end
       --mute  text
       groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute text$") and is_mod(msg) and groups then
         if redis:get('mute_texttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute text is already on*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Text Is Already Muted*', 1, 'md')
         else
           redis:set('mute_texttg:'..chat_id, true)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute text has been enabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Text Has Been Muted*', 1, 'md')
         end
       end
       if input:match("^[#!/][Uu]nmute text$") and is_mod(msg) and groups then
         if not redis:get('mute_texttg:'..chat_id) then
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute text is already disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Text Is Already UnMuted*', 1, 'md')
         else
           redis:del('mute_texttg:'..chat_id)
-          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Mute text has been disabled*', 1, 'md')
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Text Has Been UnMuted*', 1, 'md')
         end
       end
       --settings

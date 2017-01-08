@@ -10,7 +10,7 @@ package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
 tdcli = dofile('tdcli.lua')
 local redis = require 'redis'
-redis = (loadfile "redis.lua")()
+redis = (loadfile "./libs/redis.lua")()
 JSON = require('dkjson')
 db = require('redis')
 redis = db.connect('127.0.0.1', 6379)

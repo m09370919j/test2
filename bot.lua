@@ -486,7 +486,25 @@ end
           redis:del('edittg:'..chat_id)
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Has Been UnLocked_', 1, 'md')
         end
+      end		
+	--lock pin
+      groups = redis:sismember('groups',chat_id)
+      if input:match("^[#!/]lock pin$") and is_mod(msg) and groups then
+        if redis:get('pintg:'..chat_id) then
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Pin* _Is Already Locked_', 1, 'md')
+        else
+          redis:set('pintg:'..chat_id, true)
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Pin* _Has Been Locked_', 1, 'md')
+        end
       end
+      if input:match("^[#!/]unlock pin$") and is_mod(msg) and groups then
+        if not redis:get('pintg:'..chat_id) then
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Pin* _Is Already UnLocked_', 1, 'md')
+        else
+          redis:del('pintg:'..chat_id)
+          tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Pin* _Has Been UnLocked_', 1, 'md')
+        end
+      end		
       --- lock Caption
       if input:match("^[#!/]lock caption$") and is_mod(msg) and groups then
         if redis:get('captg:'..chat_id) then
@@ -635,93 +653,100 @@ end
       ---------------------------------------------------------------------------------
       local link = 'lock_linkstg:'..chat_id
       if redis:get(link) then
-        link = "`Enable`"
+        link = "`Lock`"
       else
-        link = "`Disable`"
+        link = "`UnLock`"
       end
 
       local username = 'usernametg:'..chat_id
       if redis:get(username) then
-        username = "`Enable`"
+        username = "`Lock`"
       else
-        username = "`Disable`"
+        username = "`UnLock`"
       end
 
       local tag = 'tagtg:'..chat_id
       if redis:get(tag) then
-        tag = "`Enable`"
+        tag = "`Lock`"
       else
-        tag = "`Disable`"
+        tag = "`UnLock`"
       end
 
       local flood = 'flood:'..chat_id
       if redis:get(flood) then
-        flood = "`Enable`"
+        flood = "`Lock`"
       else
-        flood = "`Disable`"
+        flood = "`UnLock`"
       end
 
       local forward = 'forwardtg:'..chat_id
       if redis:get(forward) then
-        forward = "`Enable`"
+        forward = "`Lock`"
       else
-        forward = "`Disable`"
+        forward = "`UnLock`"
       end
 
       local arabic = 'arabictg:'..chat_id
       if redis:get(arabic) then
-        arabic = "`Enable`"
+        arabic = "`Lock`"
       else
-        arabic = "`Disable`"
+        arabic = "`UnLock`"
       end
 
       local eng = 'engtg:'..chat_id
       if redis:get(eng) then
-        eng = "`Enable`"
+        eng = "`Lock`"
       else
-        eng = "`Disable`"
+        eng = "`UnLock`"
       end
 
       local badword = 'badwordtg:'..chat_id
       if redis:get(badword) then
-        badword = "`Enable`"
+        badword = "`Lock`"
       else
-        badword = "`Disable`"
+        badword = "`UnLock`"
       end
 
       local edit = 'edittg:'..chat_id
       if redis:get(edit) then
-        edit = "`Enable`"
+        edit = "`Lock`"
       else
-        edit = "`Disable`"
+        edit = "`UnLock`"
       end
 
+	local pin = 'pintg:'..chat_id
+      if redis:get(pin) then
+        edit = "`Lock`"
+      else
+        edit = "`UnLock`"
+      end		
+			
       local emoji = 'emojitg:'..chat_id
       if redis:get(emoji) then
-        emoji = "`Enable`"
+        emoji = "`Lock`"
       else
-        emoji = "`Disable`"
+        emoji = "`UnLock`"
       end
 
       local caption = 'captg:'..chat_id
       if redis:get(caption) then
-        caption = "`Enable`"
+        caption = "`Lock`"
       else
-        caption = "`Disable`"
+        caption = "`UnLock`"
       end
 
       local inline = 'inlinetg:'..chat_id
       if redis:get(inline) then
-        inline = "`Enable`"
+        inline = "`Lock`"
       else
-        inline = "`Disable`"
+        inline = "`UnLock`"
       end
 
       local reply = 'replytg:'..chat_id
       if redis:get(reply) then
-        reply = "`Enable`"
+        reply = "`Lock`"
       else
-        reply = "`Disable`"
+        reply = "`UnLock`"
       end
 			
 	local contact = 'lock_contacttg:'..chat_id
@@ -956,33 +981,44 @@ end
         text1 = "`UnMute`"
       end
       if input:match("^[#!/][Ss]ettings$") and is_mod(msg) then
-        local text = "👥 SuperGroup Settings :".."\n"
-        .."*Lock Flood => *".."`"..flood.."`".."\n"
-        .."*Lock Link => *".."`"..link.."`".."\n"
-        .."*Lock Tag => *".."`"..tag.."`".."\n"
-        .."*Lock Username => *".."`"..username.."`".."\n"
-        .."*Lock Forward => *".."`"..forward.."`".."\n"
-        .."*Lock Arabic/Persian => *".."`"..arabic..'`'..'\n'
-        .."*Lock English => *".."`"..eng..'`'..'\n'
-        .."*Lock Reply => *".."`"..reply..'`'..'\n'
-        .."*Lock Fosh => *".."`"..badword..'`'..'\n'
-        .."*Lock Edit => *".."`"..edit..'`'..'\n'
-        .."*Lock Caption => *".."`"..caption..'`'..'\n'
-        .."*Lock Inline => *".."`"..inline..'`'..'\n'
-        .."*Lock Emoji => *".."`"..emoji..'`'..'\n'
-        .."*➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*".."\n"
-        .."🗣 Mute List :".."\n"
-        .."*Mute All : *".."`"..All.."`".."\n"
-        .."*Mute Sticker : *".."`"..sticker.."`".."\n"
-        .."*Mute Gif : *".."`"..gift.."`".."\n"
-        .."*Mute Contact : *".."`"..contact.."`".."\n"
-        .."*Mute Photo : *".."`"..photo.."`".."\n"
-        .."*Mute Audio : *".."`"..audio.."`".."\n"
-        .."*Mute Voice : *".."`"..voice.."`".."\n"
-        .."*Mute Video : *".."`"..video.."`".."\n"
-        .."*Mute Document : *".."`"..document.."`".."\n"
-        .."*Mute Text : *".."`"..text1.."`".."\n"
-        .."*Mute Team* - @MuteTeam"
+        local text = "*Group Settings:*".."\n"
+	.."*--------------------*".."\n"			
+        .."*Link: *".."`"..link.."`".."\n"
+        .."*HashTag{#}: *".."`"..tag.."`".."\n"
+        .."*Tag{@}: *".."`"..username.."`".."\n"
+        .."*Forward: *".."`"..forward.."`".."\n"
+	.."*Sticker: *".."`"..sticker.."`".."\n"
+	.."*Contact: *".."`"..contact.."`".."\n"			
+	.."*Caption: *".."`"..caption..'`'..'\n'			
+        .."*Arabic/Persian: *".."`"..arabic..'`'..'\n'
+        .."*English: *".."`"..eng..'`'..'\n'
+        .."*Reply: *".."`"..reply..'`'..'\n'
+        .."*Badword: *".."`"..badword..'`'..'\n'
+	.."*Emoji: *".."`"..emoji..'`'..'\n'			
+        .."*Edit: *".."`"..edit..'`'..'\n'
+	.."*Pin: *".."`"..pin..'`'..'\n'			
+        .."*Inline: *".."`"..inline..'`'..'\n'			
+	.."*Flood: *".."`"..flood.."`".."\n"			
+        .."*--------------------*".."\n"
+	.."*Flood Settings:*".."\n"		
+	.."*Flood Max: *".."`5`".."\n"
+	.."*Flood Time: *".."`3`".."\n"
+	.."*Max Char: *".."`4069`".."\n"
+	.."*--------------------*".."\n"
+        .."*Mutes List:*".."\n"
+        .."*All: *".."`"..All.."`".."\n"
+	.."*Text: *".."`"..text1.."`".."\n"			
+        .."*Gif: *".."`"..gift.."`".."\n"
+        .."*Photo: *".."`"..photo.."`".."\n"
+	.."*Video: *".."`"..video.."`".."\n"			
+        .."*Audio: *".."`"..audio.."`".."\n"
+        .."*Voice: *".."`"..voice.."`".."\n"
+        .."*Document : *".."`"..document.."`".."\n"
+	.."*--------------------*".."\n"
+	.."*Language Settings:*".."\n"
+	.."*Group Language: *".."`EN`".."\n"
+	.."*--------------------*".."\n"			
+        .."*BOT V-1"
         tdcli.sendText(chat_id, msg.id_, 0, 1, nil, text, 1, 'md')
       end
       if input:match("^[#!/][Ff]wd$") then

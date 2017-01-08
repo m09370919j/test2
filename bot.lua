@@ -9,6 +9,7 @@ serp = require 'serpent'.block
 --redis = Redis.connect('127.0.0.1', 6379)
 
 tdcli = dofile('tdcli.lua')
+tdcli = dofile('./libs/tdcli.lua')
 local redis = require 'redis'
 redis = (loadfile "./libs/redis.lua")()
 JSON = require('dkjson')

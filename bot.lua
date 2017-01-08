@@ -361,7 +361,7 @@ end
       -------------------------------------------------------
 
       --lock links
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock link$") and is_mod(msg) and groups then
         if redis:get('lock_linkstg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Link* _Posting Is Already Locked_', 1, 'md')

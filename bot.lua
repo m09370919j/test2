@@ -376,7 +376,7 @@ end
         end
       end
       --lock username
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock username$") and is_mod(msg) and groups then
         if redis:get('usernametg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Tag* _Posting Is Already Locked_', 1, 'md')
@@ -394,7 +394,7 @@ end
         end
       end
       --lock tag
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock tag$") and is_mod(msg) and groups then
         if redis:get('tagtg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*HashTag* _Posting Is Already Locked_', 1, 'md')
@@ -412,7 +412,7 @@ end
         end
       end
       --lock forward
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock forward$") and is_mod(msg) and groups then
         if redis:get('forwardtg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Forward* _Posting Is Already Locked_', 1, 'md')
@@ -430,7 +430,7 @@ end
         end
       end
       --arabic/persian
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock arabic$") and is_mod(msg) and groups then
         if redis:get('arabictg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Arabic/Persian* _Posting Is Already Locked_', 1, 'md')
@@ -448,7 +448,7 @@ end
         end
       end
       ---english
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock english$") and is_mod(msg) and groups then
         if redis:get('engtg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*English* _Posting Is Already Locked_', 1, 'md')
@@ -466,7 +466,7 @@ end
         end
       end
       --lock foshtg
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock fosh$") and is_mod(msg) and groups then
         if redis:get('badwordtg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*BadWord* _Posting Is Already Locked_', 1, 'md')
@@ -484,7 +484,7 @@ end
         end
       end
       --lock edit
-      groups = redis:sismember('groups',chat_id)
+     -- groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock edit$") and is_mod(msg) and groups then
         if redis:get('edittg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Edit* _Is Already Locked_', 1, 'md')
@@ -502,7 +502,7 @@ end
         end
       end		
 	--lock pin
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock pin$") and is_mod(msg) and groups then
         if redis:get('pintg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Pin* _Is Already Locked_', 1, 'md')
@@ -537,7 +537,7 @@ end
         end
       end
       --lock emoji
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock emoji") and is_mod(msg) and groups then
         if redis:get('emojitg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Emoji* _Posting Is Already Locked_', 1, 'md')
@@ -555,7 +555,7 @@ end
         end
       end
       --- lock inline
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock inline") and is_mod(msg) and groups then
         if redis:get('inlinetg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Inline* _Posting Is Already Locked_', 1, 'md')
@@ -573,7 +573,7 @@ end
         end
       end
       -- lock reply
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock reply") and is_mod(msg) and groups then
         if redis:get('replytg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Reply* _Posting Is Already Locked_', 1, 'md')
@@ -591,7 +591,7 @@ end
         end
       end
       --lock tgservice
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Ll]ock tgservice$") and is_mod(msg) and groups then
         if redis:get('tgservice:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*TGservice* _Is Already Locked_', 1, 'md')
@@ -609,7 +609,7 @@ end
         end
       end
       --lock flood (by @Flooding)
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/]lock flood") and is_mod(msg) and groups then
         if redis:get('floodtg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Flood* _Is Already Locked_', 1, 'md')
@@ -627,7 +627,7 @@ end
         end
       end
 
-		groups = redis:sismember('groups',chat_id)
+		--groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Ll]ock contact$") and is_mod(msg) and groups then
         if redis:get('lock_contacttg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Contact* _Posting Is Already Locked_', 1, 'md')
@@ -645,7 +645,7 @@ end
         end
       end	
 	
-	groups = redis:sismember('groups',chat_id)
+	--groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Ll]ock sticker$") and is_mod(msg) and groups then
         if redis:get('lock_stickertg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Sticker* _Posting Is Already Locked_', 1, 'md')
@@ -779,7 +779,7 @@ end
 			
       ----------------------------
       --muteall
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute all$") and is_mod(msg) and groups then
         if redis:get('mute_alltg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*All* _Things Is Already Muted_', 1, 'md')
@@ -798,7 +798,7 @@ end
       end
 
       --mute gift
-      groups = redis:sismember('groups',chat_id)
+    --  groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute gif$") and is_mod(msg) and groups then
         if redis:get('mute_gifttg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Gif* _Is Already Muted_', 1, 'md')
@@ -817,7 +817,7 @@ end
       end
       
       --mute photo
-      groups = redis:sismember('groups',chat_id)
+     -- groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute photo$") and is_mod(msg) and groups then
         if redis:get('mute_phototg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Photo* _Is Already Muted_', 1, 'md')
@@ -835,7 +835,7 @@ end
         end
       end
       --mute audio
-      groups = redis:sismember('groups',chat_id)
+    --  groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute audio$") and is_mod(msg) and groups then
         if redis:get('mute_audiotg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Audio* _Is Already Muted_', 1, 'md')
@@ -853,7 +853,7 @@ end
         end
       end
       --mute voice
-      groups = redis:sismember('groups',chat_id)
+     -- groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute voice$") and is_mod(msg) and groups then
         if redis:get('mute_voicetg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Voice* _Is Already Muted_', 1, 'md')
@@ -871,7 +871,7 @@ end
         end
       end
       --mute video
-      groups = redis:sismember('groups',chat_id)
+      --groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute video$") and is_mod(msg) and groups then
         if redis:get('mute_videotg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Video* _Is Already Muted_', 1, 'md')
@@ -889,7 +889,7 @@ end
         end
       end
       --mute document
-      groups = redis:sismember('groups',chat_id)
+     -- groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute document$") and is_mod(msg) and groups then
         if redis:get('mute_documenttg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Document* _Is Already Muted_', 1, 'md')
@@ -907,7 +907,7 @@ end
         end
       end
       --mute  text
-      groups = redis:sismember('groups',chat_id)
+     -- groups = redis:sismember('groups',chat_id)
       if input:match("^[#!/][Mm]ute text$") and is_mod(msg) and groups then
         if redis:get('mute_texttg:'..chat_id) then
           tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '*Text* _Is Already Muted_', 1, 'md')

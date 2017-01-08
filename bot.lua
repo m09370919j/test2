@@ -15,7 +15,7 @@ JSON = require('dkjson')
 db = require('redis')
 redis = db.connect('127.0.0.1', 6379)
 serpent = require('serpent')
-redis:select(2)}
+redis:select(2)
 redis = dofile('redis.lua')
 JSON = require('dkjson')
 serpent = require('serpent')
